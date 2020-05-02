@@ -17,41 +17,41 @@
  * the License.
  */
 
-'use strict';
+"use strict";
 
-import * as fse from 'fs-extra';
-import * as path from 'path';
+import * as fse from "fs-extra";
+import * as path from "path";
 
-const CONFIG_PATH = path.resolve(__dirname, '../config.json');
-
+const CONFIG_PATH = path.resolve(__dirname, "../config.json");
 
 export type Config = {
-    cache: 'datastore' | 'memory' | null;
-    timeout: number;
-    port: string;
-    host: string
-    width: number;
-    height: number;
-    headers: { [key: string]: string };
+  cache: "datastore" | "memory" | null;
+  timeout: number;
+  port: string;
+  host: string;
+  width: number;
+  height: number;
+  headers: { [key: string]: string };
+  whiteList: string[];
 };
 
 export class ConfigManager {
-    public static config: Config = {
-        cache: null,
-        timeout: 10000,
-        port: '3000',
-        host: '0.0.0.0',
-        width: 1000,
-        height: 1000,
-        headers: {}
-    };
+  public static config: Config = {
+    cache: null,
+    timeout: 10000,
+    port: "3000",
+    host: "0.0.0.0",
+    width: 1000,
+    height: 1000,
+    headers: {},
+    whiteList: [],
+  };
 
-    static async getConfiguration(): Promise<Config> {
-        // Load config.json if it exists.
-        if (fse.pathExistsSync(CONFIG_PATH)) {
-            ConfigManager.config = Object.assign(ConfigManager.config, await fse.readJson(CONFIG_PATH));
-        }
-        return ConfigManager.config;
+  static async getConfiguration(): Promise<Config> {
+    // Load config.json if it exists.
+    if (fse.pathExistsSync(CONFIG_PATH)) {
+      ConfigManager.config = Object.assign(ConfigManager.config, await fse.readJson(CONFIG_PATH));
     }
+    return ConfigManager.config;
+  }
 }
-
