@@ -1,1 +1,1 @@
-{ "cache": "memory", "datastoreCache": false }
+{ "cache": "datastore", "datastoreCache": true }
